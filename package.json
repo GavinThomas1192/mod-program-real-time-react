@@ -1,5 +1,5 @@
 {
-  "name": "ModProgramming",
+  "name": "33",
   "version": "1.0.0",
   "engines": {
     "node": "8.1.2"
@@ -11,7 +11,7 @@
     "watch": "webpack-dev-server --inline --hot"
   },
   "keywords": [],
-  "author": "Code Fellows, LLC",
+  "author": "Gavin Thomas",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.26.0",

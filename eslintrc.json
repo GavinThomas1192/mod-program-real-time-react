@@ -6,7 +6,9 @@
    "no-console": "off",
    "no-unused-vars": "off",
    "indent": [ "error", 2 ],
-   "semi": ["error", "always"]
+   "semi": ["error", "always"],
+   "parser": "babel-eslint"
+   
  },
  "parserOptions": {
    "sourceType": "module",
