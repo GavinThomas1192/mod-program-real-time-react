@@ -3,13 +3,9 @@ import './_app.scss';
 import Navbar from '../navbar';
 import {connect} from 'react-redux';
 import * as utils from '../../lib/utils';
-import {tokenSet} from '../../action/auth-actions';
-import LandingContainer from '../landing-container';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
-import SettingsContainer from '../settings-container';
-import DashboardContainer from '../dashboard-container';
-import GalleryContainer from '../gallery-container';
-import Hero from '../hero-container';
+import Homepage from '../homepage'
+import Room from '../room';
 
 class App extends React.Component {
 
@@ -25,13 +21,12 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Navbar />
-            {utils.renderIf(!this.props.auth,
-              <Hero />
-            )} 
-            <Route path="/welcome/:auth" component={LandingContainer}/>
+            <Homepage />
+            <Room />
+            {/* <Route path="/welcome/:auth" component={LandingContainer}/>
             <Route exact path="/settings" component={() => this.props.auth ? <SettingsContainer/> : <Redirect to="/home" />}/>
             <Route exact path="/home" component={() => this.props.auth ? <DashboardContainer/> : <Redirect to="/home" />}/>
-            <Route exact path="/gallery" component={() => this.props.auth ? <GalleryContainer/> : <Redirect to="/home" />}/>
+            <Route exact path="/gallery" component={() => this.props.auth ? <GalleryContainer/> : <Redirect to="/home" />}/> */}
           </div>
         </BrowserRouter>
       </div>
