@@ -1,8 +1,8 @@
 import React from 'react';
-import { route, IndexRoute } from 'react-router';
-import App from './components/app';
-import HomePage from './component/HomePage';
-import Room from './component/Room';
+import { Route, IndexRoute } from 'react-router';
+import App from './component/app';
+import HomePage from './component/homepage';
+import Room from './component/room';
 
 export default (
     <Route path='/' component={App} >

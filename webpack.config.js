@@ -47,7 +47,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractPlugin.extract(['css-loader', 'sass-loader']),
+        exclude: /^node_modules$/,
+        loader: ExtractPlugin.extract(['css-loader', 'sass-loader', 'autoprefixer-loader', 'style-loader']),
       },
       {
         test: /\.(woff|woff2|ttf|eot|glyph|\.svg)$/,
