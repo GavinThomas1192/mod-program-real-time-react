@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './component/app';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 import appCreateStore from './lib/app-create-store';
 import * as utils from './lib/utils';
 import {persistStore} from 'redux-persist';
@@ -15,7 +16,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <App />
+        <Router routes={routes} history={browserHistory} />
       </Provider>
     );
   }
