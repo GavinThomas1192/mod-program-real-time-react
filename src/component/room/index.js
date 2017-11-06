@@ -1,8 +1,12 @@
 import React from 'react';
 import * as actions from '../../actions/challengesActions';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import Codemirror from 'react-codemirror';  
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const io = require('socket.io-client');
+const socket = io();
+
+import Codemirror from 'react-codemirror';
 import 'codemirror/lib/codemirror.css';
 // import 'codemirror/theme/monokai.css';
 
@@ -26,11 +30,15 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        this.props.challenge.id == undefined ? this.props.actions.getChallenges() : alert('else in room');
+        this.props.challenge.id == undefined ? this.props.actions.getChallenges() : socket.emit('room', { room: this.props.challenge.id }), this.setState({ users: users });
     }
 
+    componentWillReceiveProps(nextProps) {
+        socket.emit('room', { room: nextProps.challenge.id })
+    };
+
     updateCodeInState(newText) {
-        this.setState({code: newText});
+        this.setState({ code: newText });
     }
 
     render() {
@@ -53,18 +61,17 @@ class Room extends React.Component {
 }
 
 
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
     if (state.challenges.length > 0) {
-      const challenge = state.challenges.filter(challenge => 
-        {return challenge.id == ownProps.params.id})[0]
-      return {challenge: challenge}
+        const challenge = state.challenges.filter(challenge => { return challenge.id == ownProps.params.id })[0]
+        return { challenge: challenge }
     } else {
-      return {challenge: {title: '', description: ''}}
+        return { challenge: { title: '', description: '' } }
     }
-  }
-  
-  function mapDispatchToProps(dispatch) {  
-    return {actions: bindActionCreators(actions, dispatch)}
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Room) 
+}
+
+function mapDispatchToProps(dispatch) {
+    return { actions: bindActionCreators(actions, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room) 
