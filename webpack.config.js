@@ -22,7 +22,7 @@ let plugins = [
   }),
 ];
 
-if(production) {
+if (production) {
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
 }
 
@@ -48,8 +48,10 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /^node_modules$/,
-        loader: ExtractPlugin.extract(['css-loader', 'sass-loader', 'autoprefixer-loader', 'style-loader']),
+        loader: ExtractPlugin.extract(['css-loader', 'sass-loader']),
       },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
+
       {
         test: /\.(woff|woff2|ttf|eot|glyph|\.svg)$/,
         use: [

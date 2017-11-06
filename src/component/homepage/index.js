@@ -1,27 +1,27 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as challengesAction from '../../actions/challengesActions';
 import ChallengesList from '../ChallengesList';
 
 
 class Homepage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.children ? this.props.actions.getChallenges() : undefined;
-    //     if(this.props.children.length === 0) {
-    //         this.props.actions.getchallenges()
-    //     }
+        //     if(this.props.children.length === 0) {
+        //         this.props.actions.getchallenges()
+        //     }
     }
 
     render() {
         return (
             <div>
-               <ChallengesList
-                challenges={this.props.challenges} />
+                <ChallengesList
+                    challenges={this.props.challenges} />
             </div>
 
         )
@@ -33,8 +33,8 @@ let mapStateToProps = (state) => ({
 });
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators(Object.assign(userActions, challengesActions), dispatch)}
-  }
+    return { actions: bindActionCreators(Object.assign(userActions, challengesActions), dispatch) }
+}
 
 
 
@@ -44,11 +44,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
 //     children: state.children,
 //     auth: state.auth,
 //   });
-  
+
 //   let mapDispatchToProps = dispatch => ({
 //     tokenSet: token => dispatch(tokenSet(token)),
 //   });
-  
+
 //   export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 // this.props.auth ? <SettingsContainer/> : <Redirect to="/home"
