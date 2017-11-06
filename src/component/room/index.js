@@ -4,19 +4,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Codemirror from 'react-codemirror';  
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/monokai.css';
-import 'codemirror/theme/bespin.css';
-import 'codemirror/theme/3024-day.css';
-import 'codemirror/theme/3024-night.css';
-import 'codemirror/theme/cobalt.css';
-import 'codemirror/theme/eclipse.css';
-import 'codemirror/theme/dracula.css';
-import 'codemirror/theme/isotope.css';
-import 'codemirror/theme/duotone-light.css';
-import 'codemirror/theme/icecoder.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/theme/midnight.css';
-import 'codemirror/theme/solarized.css';
+// import 'codemirror/theme/monokai.css';
+
 
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/mode/ruby/ruby.js'
@@ -33,6 +22,7 @@ class Room extends React.Component {
         this.state = {
             code: ''
         }
+        this.updateCodeInState = this.updateCodeInState.bind(this);
     }
 
     componentDidMount() {
@@ -46,16 +36,16 @@ class Room extends React.Component {
     render() {
         const options = {
             lineNumbers: true,
-            mode: 'javascript',
-            theme: 'monokai'
+            mode: 'javascript'
+
         }
         return (
             <div>
                 <h1>{this.props.challenge.title}</h1>
                 <p>{this.props.challenge.description}</p>
                 <Codemirror
-                    value={'hello world!'}
-                    onChange={`coming soon`}
+                    value={this.state.code}
+                    onChange={this.updateCodeInState}
                     options={options} />
             </div>
         )
