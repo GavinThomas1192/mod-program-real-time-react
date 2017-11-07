@@ -26,8 +26,12 @@ class Room extends React.Component {
         this.state = {
             code: ''
         }
+        socket.on('receive code', (payload) => this.updateCodeInState(payload));
+
         this.updateCodeInState = this.updateCodeInState.bind(this);
     }
+
+
 
     componentDidMount() {
         this.props.challenge.id == undefined ? this.props.actions.getChallenges() : socket.emit('room', { room: this.props.challenge.id }), this.setState({ users: users });
@@ -37,8 +41,18 @@ class Room extends React.Component {
         socket.emit('room', { room: nextProps.challenge.id })
     };
 
+    componentWillUnmount() {
+        socket.emit('leave room', {
+            room: this.props.challenge.id
+        })
+    }
+
     updateCodeInState(newText) {
-        this.setState({ code: newText });
+        this.setState({ code: newText })
+        socket.emit('coding event', {
+            room: this.props.challenge.id,
+            newCode: newText
+        })
     }
 
     render() {
